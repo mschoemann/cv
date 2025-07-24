@@ -37,24 +37,26 @@ knitr::opts_chunk$set(
 source("functions.R")
 
 # Store IDs
-gscholar_id <- 'DY2D56IAAAAJ'
+gscholar_id <- 'EdZjQtsAAAAJ&hl'
 gscholar_page <- paste0("https://scholar.google.com/citations?user=", gscholar_id)
 ```
 
-\par\centering{\LARGE{John Paul Helveston, Ph.D.}}
-\par\centering{Engineering Management and Systems Engineering}
+\par\centering{\LARGE{Martin Schoemann, MSc, BA}}
+\par\centering{Psychological Research Methods \& Cognitive Modelling}
 \vspace{-5pt}
-\par\centering{The George Washington University}
+\par\centering{School of Science - Department of Psychology}
 \vspace{-5pt}
-\par\centering{Science \& Engineering Hall, Office 2830}
+\par\centering{TUD Dresden University of Technology}
 \vspace{-5pt}
-\par\centering{800 22nd St NW, Washington, DC 20052}
+\par\centering{BZW, Office A322}
 \vspace{-5pt}
-\par\centering{{\large\Telefon} +1 (202) 994-7173}
+\par\centering{Zellescher Weg 17, Dresden, D-01069}
 \vspace{-5pt}
-\par\centering{{\large\Letter} jph@gwu.edu}
+\par\centering{{\large\Telefon} +49 (351) 463-32467}
 \vspace{-5pt}
-\par\centering{\href{http://www.jhelvy.com}{www.jhelvy.com}}
+\par\centering{{\large\Letter} martin.schoemann@tu-dresden.de}
+<!-- \vspace{-5pt} -->
+<!-- \par\centering{\href{http://www.jhelvy.com}{www.jhelvy.com}} -->
 
 \vspace{-10pt}
 
@@ -65,8 +67,11 @@ gscholar_page <- paste0("https://scholar.google.com/citations?user=", gscholar_i
 2018 - Present & \textbf{George Washington University}, Washington, D.C.& \\
  & Assistant Professor, Engineering Management and Systems Engineering\\[5pt]
 
-2016 - 2018 & \textbf{Boston University}, Boston, MA & \\
- & Postdoctoral Fellow, Institute for Sustainable Energy\\
+2020 -- 2022 & \textbf{Aarhus University}, Aarhus, Denmark & \\
+ & Research Assistant, Psychological Research Methods and Cognitive Modelling / CRC 940 *Volition and Cognitive Control*\\
+
+2016 -- 2020 & \textbf{TUD Dresden University of Technology}, Dresden, Germany & \\
+ & Predoctoral Researcher, Psychological Research Methods and Cognitive Modelling / CRC 940 *Volition and Cognitive Control*\\
 \end{longtable}
 
 \vspace{-10pt}
