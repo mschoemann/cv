@@ -1,9 +1,19 @@
-library(pander)
-library(stringr)
-library(dplyr)
-library(googlesheets4)
-library(lubridate)
-library(kableExtra)
+library(groundhog)
+
+pkgs = c(
+    "dplyr",
+    "stringr",
+    "lubridate",
+    "scales",
+    "googlesheets4",
+    "pander",
+    "kableExtra"
+)
+
+groundhog.library(
+    pkgs,
+    "2025-07-01"
+)
 
 gs4_deauth()
 
@@ -27,7 +37,7 @@ get_cites <- function(url) {
 
 get_cv_sheet <- function(sheet) {
     return(read_sheet(
-        ss = 'https://docs.google.com/spreadsheets/d/1xyzgW5h1rVkmtO1rduLsoNRF9vszwfFZPd72zrNmhmU/edit?usp=sharing',
+        ss = 'https://docs.google.com/spreadsheets/d/1zH08x-6om6SzIyDuByLtm-zYK9Fl_QS57CRAckKTu4o/edit?usp=sharing',
         sheet = sheet
     ))
 }
@@ -41,28 +51,44 @@ make_bullet_list <- function(x) {
 }
 
 make_ordered_list_filtered <- function(df, cat) {
-  return(df %>%
-    filter(category == {{cat}}) %>%
-        mutate(
-            citation = str_replace_all(
-                citation,
-                "\\\\\\*(\\w+),",
-                "\\\\*\\\\underline{\\1},"
-            )
-        ) %>%
-    pull(citation) %>%
+  return(df |>
+    filter(category == {{cat}}) |>
+        # mutate(
+        #     citation = str_replace_all(
+        #         citation,
+        #         "\\\\\\*(\\w+),",
+        #         "\\\\*\\\\underline{\\1},"
+        #     )
+        # ) |>
+    pull(citation) |>
     make_ordered_list()
   )
 }
 
 na_to_space <- function(x) {
-  return(ifelse(is.na(x), '', x))
+    return(ifelse(is.na(x), '', x))
 }
 
 enquote <- function(x) {
-  return(paste0('"', x, '"'))
+    return(paste0('"', x, '"'))
 }
 
 markdown_url <- function(url) {
-  return(paste0('[', url, '](', url,')'))
+    return(paste0('[', url, '](', url,')'))
+}
+
+make_grants_list <- function(df) {
+    df |>
+        mutate(
+            title = if_else(
+                is.na(url),
+                title,
+                paste0('[', title, ']', '(', url, ')')
+            ),
+            citation = paste(
+                sponsor, title, colabs, credit, period, sep = '. '
+            )
+        ) |>
+        pull(citation) %>%
+        make_ordered_list()
 }

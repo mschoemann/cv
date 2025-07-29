@@ -27,3 +27,18 @@ page <- GET(url)
 page_content <- str_to_lower(content(page, as = "text"))
 str_split(page_content, 'cited by')[[1]]
 
+
+library(groundhog)
+groundhog.library(
+    c("scholar", "dplyr"),
+    "2025-07-01"
+)
+
+author_id = "EdZjQtsAAAAJ&hl"
+pubs = get_publications(author_id)
+
+pubs |>
+    select(year, title, pubid) |>
+    arrange(desc(year)) |>
+    View()
+
