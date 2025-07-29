@@ -15,15 +15,11 @@ format:
       - heightrounded
     include-in-header:
       - preamble.tex
-    keep-tex: true
 execute:
   warning: false
   echo: false
   message: false
   eval: true
-  
-# filters:
-#   - reverse_list.lua  
 ---
 
 ```{r}
@@ -52,6 +48,7 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
 # TODO
 # check if ordering is consistent - recent first.
 # to numbered lists with highest number first. 
+# adjust education table to academic appointment table.
 ```
 
 \par\centering{\LARGE{Martin Schoemann, MSc, BA}}
@@ -103,19 +100,19 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
 
 % \multicolumn{3}{p{16cm}}{Doctoral Committee: \emph{Stefan Scherbaum, Andreas Glöckner, Sebastian Pannasch, \& Alexander Strobel}}\\[5pt]
     
-2016 & Erfurt University, Erfurt, Germany & MSc Psychology\\
+2016 & Erfurt University, Erfurt, Germany & \textbf{MSc Psychology}\\
     
 \multicolumn{3}{p{16cm}}{Thesis: \emph{Distinguishing Comparison Strategies in Intertemporal Decision Making: An Eye-tracking Study}}\\
     
 \multicolumn{3}{p{16cm}}{Advisors: \emph{Frank Renkewitz \& Stefan Scherbaum}}\\[5pt]
 
-2013 & Erfurt University, Erfurt, Germany & BA Psychology \& Philosophy\\
+2013 & Erfurt University, Erfurt, Germany & \textbf{BA Psychology \& Philosophy}\\
     
 \multicolumn{3}{p{16cm}}{Thesis: \emph{Small Sample Advantage in Complex Environments: On the Detection of Population Parameters in the Iowa Gambling Task}}\\
     
 \multicolumn{3}{p{16cm}}{Advisor: \emph{Tilman Betsch}}\\[10pt]
 
-2024 & Hochschudidaktik Sachsen, Leipzig, Germany & Cert. Teacher of Higher Education\\
+2024 & Hochschudidaktik Sachsen, Leipzig, Germany & \textbf{Cert. Teacher of Higher Education}\\
 
 \multicolumn{3}{p{16cm}}{Thesis: \emph{Reducing Cognitive Load while Simultaneously Teaching Statistics and Programming Skills}}\\
 
