@@ -49,6 +49,7 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
 # check if ordering is consistent - recent first.
 # to numbered lists with highest number first. 
 # adjust education table to academic appointment table.
+# add affiliated grants -- DONE
 ```
 
 \par\centering{\LARGE{Martin Schoemann, MSc, BA}}
@@ -387,28 +388,28 @@ advisees |>
 ```{r}
 grants <- get_cv_sheet('grants') |> 
     filter(awarded == 1) |> 
-    filter(affiliated == 0) |> 
     mutate(
+        sponsor = if_else(
+            !is.na(id),
+            paste0(sponsor, " (No. ", id, ")"),
+            sponsor
+        ),
         title = enquote(title),
         amount = if_else(
             is.na(budget_total), 
             "",
-            scales::dollar(budget_total)
+            label_euro(budget_total)
         ),
         percent = budget_me / budget_total,
-        credit = if_else(
-            is.na(budget_total), 
-            "", 
-            ifelse(
-                percent == 1,
-                "100% Credit",
-                paste0("Schoemann portion ", scales::dollar(budget_me))
-            )
+        credit = case_when(
+            percent == 1 ~ "100% Credit",
+            percent != 1 ~ paste0("Schoemann portion ", scales::dollar(budget_me)),
+            .default = "Affiliated researcher"
         ),
-        colabs = if_else(
-            is.na(collaborators),
-            amount,
-            paste(paste0("With ", collaborators), amount, sep = '. ')
+        colabs = case_when(
+            affiliated == 1 & !is.na(collaborators) ~ paste(paste0("PI: ", collaborators), amount, sep = '. '),
+            affiliated == 0 & !is.na(collaborators) ~ paste(paste0("With ", collaborators), amount, sep = '. '),
+            .default = amount
         ),
         period = paste0(period, '.')
     ) |> 
@@ -423,6 +424,8 @@ grants <- get_cv_sheet('grants') |>
 #     filter(pi == 0)
 grants_internal <- grants |> 
     filter(external == 0, pi == 1)
+grants_affiliated <- grants |> 
+    filter(affiliated == 1)
 
 # total <- scales::dollar(sum(grants_ex$budget_total))
 # total_ex_pi <- scales::dollar(sum(grants_ex_pi$budget_managed))
@@ -435,6 +438,14 @@ grants_internal <- grants |>
 #| results: asis
 
 make_grants_list(grants_internal)
+```
+
+
+## Affiliated Grants
+```{r}
+#| results: asis
+
+make_grants_list(grants_affiliated)
 ```
 
 

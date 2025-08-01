@@ -89,6 +89,13 @@ make_grants_list <- function(df) {
                 sponsor, title, colabs, credit, period, sep = '. '
             )
         ) |>
-        pull(citation) %>%
+        pull(citation) |>
         make_ordered_list()
 }
+
+label_euro <- scales::label_currency(
+    prefix = "€",
+    suffix = "",
+    big.mark = ",",
+    decimal.mark = "."
+)
