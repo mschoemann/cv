@@ -48,7 +48,7 @@ jobs:
           library(groundhog)
           set.groundhog.folder("/home/runner/R_groundhog/")
           pkgs <- c("quarto", "rmarkdown", "here", "stringi", "tinytex")
-          groundhog.library(pkgs, "2024-07-01")
+          groundhog.library(pkgs, "2025-07-01")
         shell: Rscript {0}
 
       - name: Set up TinyTeX (LaTeX engine for Quarto)
