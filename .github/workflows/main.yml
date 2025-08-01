@@ -46,22 +46,28 @@ jobs:
       - name: Install R dependencies via groundhog
         run: |
           library(groundhog)
+          set.groundhog.folder(/home/runner/R_groundhog/)
           pkgs <- c("quarto", "rmarkdown", "here", "stringi", "tinytex")
           groundhog.library(pkgs, "2024-07-01")
         shell: Rscript {0}
 
-      - name: Install TinyTeX (LaTeX engine for Quarto)
-        run: |
-          wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
-          echo "PATH=$HOME/.TinyTeX/bin/x86_64-linux:$PATH" >> $GITHUB_ENV
+      - name: Set up TinyTeX (LaTeX engine for Quarto)
+        uses: r-lib/actions/setup-tinytex@v2
 
       - name: Install essential LaTeX packages
         run: |
           tlmgr install marvosym parskip fancyhdr lastpage hyperref xcolor svg
 
+      - name: Check Quarto project
+        run: quarto check
+      
       - name: Render PDF
         run: |
           quarto render cv_mschoemann.qmd --to pdf
+
+      - name: Confirm PDF was created
+        run: |
+          test -f cv_mschoemann.pdf
 
       - name: Set up Git Config
         run: |
