@@ -50,6 +50,7 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
 # to numbered lists with highest number first. 
 # adjust education table to academic appointment table.
 # add affiliated grants -- DONE
+# add #citations -- DONE
 ```
 
 \par\centering{\LARGE{Martin Schoemann, MSc, BA}}
@@ -166,17 +167,26 @@ ORCID: \href{https://orcid.org/0000-0002-2531-4175}{0000-0002-2531-4175} | [Goog
 
 ```{r}
 pubs <- get_cv_sheet('pubs') |> 
-  mutate(
-    journal  = ifelse(is.na(journal), '', paste0('_', journal, '_.')),
-    number   = ifelse(is.na(number), '', paste0(number, '.')),
-    doi      = ifelse(
-               is.na(doi), '',
-               paste0('DOI: [', doi, '](', 'https://doi.org/', doi, ')')),
-    year     = paste0("(", year, ")."),
-    title    = paste0(title,"."),
-    citation = paste(author, year, title, journal, number, doi)
-  ) |> 
-  arrange(desc(pub_date))
+    left_join(
+        gscholar_cites(gscholar_id),
+        by = "id_scholar"
+    ) |> 
+    mutate(
+        journal = ifelse(is.na(journal), '', paste0('_', journal, '_.')),
+        number = ifelse(is.na(number), '', paste0(number, '.')),
+        doi = if_else(
+            is.na(doi), '',
+            paste0('DOI: [', doi, '](', 'https://doi.org/', doi, ').')
+        ),
+        year = paste0("(", year, ")."),
+        title = paste0(title,"."),
+        cites = if_else(
+            is.na(cites), '',
+            paste0(" Citations (#): ", cites, '.'),
+        ),
+        citation = paste(author, year, title, journal, number, doi, cites),
+    ) |> 
+    arrange(desc(pub_date))
 ```
 
 ```{r}

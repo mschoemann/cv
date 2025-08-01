@@ -7,7 +7,8 @@ pkgs = c(
     "scales",
     "googlesheets4",
     "pander",
-    "kableExtra"
+    "kableExtra",
+    "scholar"
 )
 
 groundhog.library(
@@ -18,7 +19,7 @@ groundhog.library(
 gs4_deauth()
 
 gscholar_stats <- function(url) {
-  cites <- get_cites(url)
+  cites <- get_stats(url)
   return(paste(
     'Citations:', cites$citations, '•',
     'h-index:',   cites$hindex, '•',
@@ -26,13 +27,22 @@ gscholar_stats <- function(url) {
   ))
 }
 
-get_cites <- function(url) {
+get_stats <- function(url) {
   html <- xml2::read_html(url)
   node <- rvest::html_nodes(html, xpath='//*[@id="gsc_rsb_st"]')
   cites_df <- rvest::html_table(node)[[1]]
   cites <- data.frame(t(as.data.frame(cites_df)[,2]))
   names(cites) <- c('citations', 'hindex', 'i10index')
   return(cites)
+}
+
+gscholar_cites <- function(gscholar_id) {
+    res = get_publications(gscholar_id) |>
+        select(
+            id_scholar = pubid,
+            cites
+        )
+    return(res)
 }
 
 get_cv_sheet <- function(sheet) {
