@@ -6,6 +6,8 @@ pkgs = c(
     "lubridate",
     "scales",
     "googlesheets4",
+    "xml2",
+    "rvest",
     "pander",
     "kableExtra",
     "scholar"
@@ -28,9 +30,9 @@ gscholar_stats <- function(url) {
 }
 
 get_stats <- function(url) {
-  html <- xml2::read_html(url)
-  node <- rvest::html_nodes(html, xpath='//*[@id="gsc_rsb_st"]')
-  cites_df <- rvest::html_table(node)[[1]]
+  html <- read_html(url)
+  node <- html_nodes(html, xpath='//*[@id="gsc_rsb_st"]')
+  cites_df <- html_table(node)[[1]]
   cites <- data.frame(t(as.data.frame(cites_df)[,2]))
   names(cites) <- c('citations', 'hindex', 'i10index')
   return(cites)
