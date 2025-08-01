@@ -46,7 +46,7 @@ jobs:
       - name: Install R dependencies via groundhog
         run: |
           library(groundhog)
-          set.groundhog.folder(/home/runner/R_groundhog/)
+          set.groundhog.folder("/home/runner/R_groundhog/")
           pkgs <- c("quarto", "rmarkdown", "here", "stringi", "tinytex")
           groundhog.library(pkgs, "2024-07-01")
         shell: Rscript {0}
