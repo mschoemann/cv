@@ -1,0 +1,8 @@
+project:
+  output-dir: docs
+  render:
+    - cv_mschoemann.qmd
+
+format:
+  pdf:
+    output-file: cv_mschoemann.pdf
