@@ -63,11 +63,11 @@ jobs:
       
       - name: Render PDF
         run: |
-          quarto render cv_mschoemann.qmd --to pdf
+          quarto render
 
       - name: Confirm PDF was created
         run: |
-          test -f cv_mschoemann.pdf
+          test -f docs/cv_mschoemann.pdf
 
       - name: Set up Git Config
         run: |
@@ -76,6 +76,6 @@ jobs:
 
       - name: Commit and Push PDF
         run: |
-          git add cv_mschoemann.pdf
+          git add docs/cv_mschoemann.pdf
           git commit -m "Update rendered PDF" || echo "No changes to commit"
           git push
