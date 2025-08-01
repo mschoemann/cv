@@ -39,7 +39,7 @@ jobs:
       - name: Cache groundhog folder
         uses: actions/cache@v4
         with:
-          path: ~/.groundhog
+          path: /home/runner/R_groundhog/
           key: ${{ runner.os }}-groundhog-${{ env.R_VERSION }}-${{ hashFiles('quarto.yml', 'cv_mschoemann.qmd') }}
           restore-keys: ${{ runner.os }}-groundhog-${{ env.R_VERSION }}-
 
@@ -47,19 +47,27 @@ jobs:
         run: |
           library(groundhog)
           set.groundhog.folder("/home/runner/R_groundhog/")
-          pkgs <- c("quarto", "rmarkdown", "here", "stringi", "tinytex")
+          pkgs <- c("quarto", "rmarkdown", "knitr")
           groundhog.library(pkgs, "2025-07-01")
         shell: Rscript {0}
 
       - name: Set up TinyTeX (LaTeX engine for Quarto)
         uses: r-lib/actions/setup-tinytex@v2
 
+      - name: Cache TinyTeX
+        uses: actions/cache@v4
+        with:
+          path: ~/TinyTeX
+          key: ${{ runner.os }}-tinytex-${{ hashFiles('quarto.yml', 'cv_mschoemann.qmd') }}
+          restore-keys: ${{ runner.os }}-tinytex-
+
       - name: Install essential LaTeX packages
         run: |
           tlmgr install marvosym parskip fancyhdr lastpage hyperref xcolor svg
 
       - name: Check Quarto project
-        run: quarto check
+        run: |
+          quarto check
       
       - name: Render PDF
         run: |
