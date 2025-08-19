@@ -28,13 +28,13 @@ execute:
 #| message: false
 #| eval: true
 
-knitr::opts_chunk$set(
-  fig.path = "figs/",
-  fig.width = 7.252,
-  fig.height = 4,
-  comment = "#>",
-  fig.retina = 3
-)
+# knitr::opts_chunk$set(
+#   fig.path = "figs/",
+#   fig.width = 7.252,
+#   fig.height = 4,
+#   comment = "#>",
+#   fig.retina = 3
+# )
 
 source("functions.R")
 
