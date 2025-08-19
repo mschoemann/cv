@@ -1,7 +1,7 @@
 name: Render Quarto PDF
 
 on:
-  push:
+  # push:
   schedule:
     # Every Saturday at 22:00 UTC → Sunday 00:00 UTC+2 (CEST)
     - cron: '0 22 * * 6'
