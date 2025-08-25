@@ -51,6 +51,25 @@ jobs:
           groundhog.library(pkgs, "2025-07-01")
         shell: Rscript {0}
 
+      - name: Install R dependencies via groundhog 2
+        run: |
+          library(groundhog)
+          set.groundhog.folder("/home/runner/R_groundhog/")
+          pkgs = c(
+            "dplyr",
+            "stringr",
+            "lubridate",
+            "scales",
+            "googlesheets4",
+            "xml2",
+            "rvest",
+            "pander",
+            "kableExtra",
+            "scholar"
+          )
+          groundhog.library(pkgs, "2025-07-01")
+        shell: Rscript {0} 
+
       - name: Set up TinyTeX (LaTeX engine for Quarto)
         uses: r-lib/actions/setup-tinytex@v2
 
