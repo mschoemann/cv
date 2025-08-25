@@ -48,7 +48,7 @@ jobs:
           library(groundhog)
           set.groundhog.folder("/home/runner/R_groundhog/")
           pkgs <- c("quarto", "rmarkdown", "knitr")
-          groundhog.library(pkgs, "2025-07-01")
+          groundhog.library(pkgs, "2025-07-01",force.install=T)
         shell: Rscript {0}
 
       - name: Install R dependencies via groundhog 2
@@ -67,7 +67,7 @@ jobs:
             "kableExtra",
             "scholar"
           )
-          groundhog.library(pkgs, "2025-07-01")
+          groundhog.library(pkgs, "2025-07-01",force.install=T)
         shell: Rscript {0} 
 
       - name: Set up TinyTeX (LaTeX engine for Quarto)
