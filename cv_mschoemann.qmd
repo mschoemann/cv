@@ -531,6 +531,10 @@ journals <- get_cv_sheet('reviews') |>
     str_replace_all('and', '&')
 
 n_journals <- length(journals)
+if (n_journals %% 2 != 0) {
+    journals[n_journals + 1] <- ""
+    n_journals <- length(journals)
+}
 stop <- round(n_journals/2)
 
 df <- tibble(
