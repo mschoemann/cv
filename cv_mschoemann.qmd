@@ -36,6 +36,8 @@ execute:
 #   fig.retina = 3
 # )
 
+Sys.setlocale("LC_TIME", "en_US.UTF-8")
+
 source("functions.R")
 
 # Store IDs
@@ -53,7 +55,7 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
 # add #citations -- DONE
 ```
 
-\par\centering{\LARGE{Martin Schoemann, MSc, BA}}
+\par\centering{\LARGE{Dr. Martin Schoemann}}
 \par\centering{Psychological Research Methods \& Cognitive Modelling}
 \vspace{-5pt}
 \par\centering{School of Science -- Faculty of Psychology}
@@ -96,11 +98,11 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
 \vspace{-10pt}
 \begin{longtable}{lll}
 
-% 2025 & TUD Dresden University of Technology, Dresden, Germany & Dr. rer. nat. Psychology\\
+2025 & TUD Dresden University of Technology, Dresden, Germany & \textbf{Dr. rer. nat. (PhD) Psychology}\\
 
-% \multicolumn{3}{p{16cm}}{Dissertation: \emph{The Trouble with Reverse Inference: On the Mapping between Decision Processes and Movement Dynamics}}\\
+\multicolumn{3}{p{16cm}}{Dissertation: \emph{The Trouble with Reverse Inference: On the Mapping between Decision Processes and Movement Dynamics}}\\
 
-% \multicolumn{3}{p{16cm}}{Doctoral Committee: \emph{Stefan Scherbaum, Andreas Glöckner, Sebastian Pannasch, \& Alexander Strobel}}\\[5pt]
+\multicolumn{3}{p{16cm}}{Doctoral Committee: \emph{Stefan Scherbaum, Andreas Glöckner, Sebastian Pannasch, \& Alexander Strobel}}\\[5pt]
     
 2016 & Erfurt University, Erfurt, Germany & \textbf{MSc Psychology}\\
     
@@ -249,13 +251,13 @@ pres_counts = pres |>
 
 `r pres_counts`
 
-## Invited Speaker
+<!-- ## Invited Speaker -->
 
-```{r}
-#| results: asis
+<!-- ```{r} -->
+<!-- #| results: asis -->
 
-make_ordered_list_filtered(pres, "invited")
-```
+<!-- make_ordered_list_filtered(pres, "invited") -->
+<!-- ``` -->
 
 
 ## Conference Presentations
@@ -314,9 +316,6 @@ df |>
 )
 ```
 
-
-## Workshops
-
 ```{r}
 teaching <- get_cv_sheet('teaching') %>%
   arrange(desc(date)) %>%
@@ -330,10 +329,22 @@ teaching <- get_cv_sheet('teaching') %>%
   )
 ```
 
+
+## Workshops
+
 ```{r}
 #| results: asis
 
 make_ordered_list_filtered(teaching, "workshop")
+```
+
+
+## Guest Lectures
+
+```{r}
+#| results: asis
+
+make_ordered_list_filtered(teaching, "guestlecture")
 ```
 
 
