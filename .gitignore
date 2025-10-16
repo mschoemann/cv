@@ -18,3 +18,5 @@
 # specifics
 notes.qmd
 
+
+**/*.quarto_ipynb
