@@ -157,7 +157,7 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
 
 ORCID: \href{https://orcid.org/0000-0002-2531-4175}{0000-0002-2531-4175} | [Google Scholar Profile](https://scholar.google.com/citations?user=EdZjQtsAAAAJ&hl=en)
 
-`{r} gscholar_stats(gscholar_page)`
+`{r} gscholar_stats(gscholar_id)`
 
 \* indicates equal contribution
 
