@@ -30,43 +30,52 @@ gscholar_stats <- function(url) {
   ))
 }
 
-get_stats <- function(url, max_tries = 3) {
-    for (i in 1:max_tries) {
-        tryCatch({
-            # Add delay to avoid rate limiting
-            if (i > 1) Sys.sleep(5)
+# get_stats <- function(url, max_tries = 3) {
+#     for (i in 1:max_tries) {
+#         tryCatch({
+#             # Add delay to avoid rate limiting
+#             if (i > 1) Sys.sleep(5)
+#
+#             # Fetch with proper headers (Linux Mint 22.2)
+#             response <- GET(
+#                 url,
+#                 user_agent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"),
+#                 timeout(30)
+#             )
+#
+#             # Check status
+#             stop_for_status(response)
+#
+#             # Parse HTML
+#             html <- read_html(content(response, as = "text", encoding = "UTF-8"))
+#             node <- html_nodes(html, xpath = '//*[@id="gsc_rsb_st"]')
+#
+#             if (length(node) == 0) {
+#                 stop("Could not find statistics table")
+#             }
+#
+#             cites_df <- html_table(node)[[1]]
+#             cites <- data.frame(t(as.data.frame(cites_df)[, 2]))
+#             names(cites) <- c('citations', 'hindex', 'i10index')
+#
+#             return(cites)
+#
+#         }, error = function(e) {
+#             if (i == max_tries) {
+#                 stop(paste("Failed after", max_tries, "attempts:", e$message))
+#             }
+#             message(paste("Attempt", i, "failed, retrying..."))
+#         })
+#     }
+# }
 
-            # Fetch with proper headers (Linux Mint 22.2)
-            response <- GET(
-                url,
-                user_agent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"),
-                timeout(30)
-            )
-
-            # Check status
-            stop_for_status(response)
-
-            # Parse HTML
-            html <- read_html(content(response, as = "text", encoding = "UTF-8"))
-            node <- html_nodes(html, xpath = '//*[@id="gsc_rsb_st"]')
-
-            if (length(node) == 0) {
-                stop("Could not find statistics table")
-            }
-
-            cites_df <- html_table(node)[[1]]
-            cites <- data.frame(t(as.data.frame(cites_df)[, 2]))
-            names(cites) <- c('citations', 'hindex', 'i10index')
-
-            return(cites)
-
-        }, error = function(e) {
-            if (i == max_tries) {
-                stop(paste("Failed after", max_tries, "attempts:", e$message))
-            }
-            message(paste("Attempt", i, "failed, retrying..."))
-        })
-    }
+get_stats <- function(scholar_id) {
+    profile <- get_profile(scholar_id)
+    return(data.frame(
+        citations = profile$total_cites,
+        hindex = profile$h_index,
+        i10index = profile$i10_index
+    ))
 }
 
 gscholar_cites <- function(gscholar_id) {
