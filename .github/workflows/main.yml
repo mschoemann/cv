@@ -7,6 +7,9 @@ on:
     - cron: '0 22 * * 6'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -61,6 +64,7 @@ jobs:
             "lubridate",
             "scales",
             "googlesheets4",
+            "httr",
             "xml2",
             "rvest",
             "pander",
@@ -68,7 +72,7 @@ jobs:
             "scholar"
           )
           groundhog.library(pkgs, "2025-07-01",force.install=T)
-        shell: Rscript {0} 
+        shell: Rscript {0}
 
       - name: Set up TinyTeX (LaTeX engine for Quarto)
         uses: r-lib/actions/setup-tinytex@v2
@@ -87,7 +91,7 @@ jobs:
       - name: Check Quarto project
         run: |
           quarto check
-      
+
       - name: Render PDF
         run: |
           quarto render
