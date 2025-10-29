@@ -188,7 +188,11 @@ pubs <- get_cv_sheet('pubs') |>
         ),
         citation = paste(author, year, title, journal, number, doi, cites),
     ) |> 
-    arrange(desc(pub_date))
+    arrange(
+        # desc(pub_date),
+        desc(year),
+        gsub("[^A-Za-z0-9 .,&']", "", author)
+    )
 ```
 
 ```{r}
@@ -374,7 +378,15 @@ advisees <- get_cv_sheet('advising') |>
 ```
 
 
-## Masters Students
+## Doctoral Students
+```{r}
+#| results: asis
+
+advisees |>
+  make_ordered_list_filtered("dr")
+```
+
+## Master's Students
 
 ```{r}
 #| results: asis
@@ -384,7 +396,7 @@ advisees |>
 ```
 
 
-## Bachelors Students
+## Bachelor's Students
 
 ```{r}
 #| results: asis
@@ -394,7 +406,7 @@ advisees |>
 ```
 
 
-## Internships
+## Interns
 
 ```{r}
 #| results: asis
