@@ -31,110 +31,82 @@ jobs:
           r-version: ${{ env.R_VERSION }}
           use-public-rspm: false
 
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
 
-    gscholarstats:
-        needs: build
-        runs-on: ubuntu-latest
-        env:
-            GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-            R_VERSION: '4.5.1'
-        steps:
-          - name: Scrape stats
-            run: |
-              install.packages(c('scholar'))
-              library(scholar)
-              gscholar_id <- 'EdZjQtsAAAAJ&hl'
-              profile <- get_profile(gscholar_id)
-              dat = data.frame(
-              citations = profile$total_cites,
-              hindex = profile$h_index,
-              i10index = profile$i10_index)
-              message(capture.output(print(dat)))
-            shell: Rscript {0}
+      - name: Install groundhog
+        run: |
+          install.packages("groundhog", repos = "https://cloud.r-project.org")
+        shell: Rscript {0}
 
+      - name: Cache groundhog folder
+        uses: actions/cache@v4
+        with:
+          path: /home/runner/R_groundhog/
+          key: ${{ runner.os }}-groundhog-${{ env.R_VERSION }}-${{ hashFiles('quarto.yml', 'cv_mschoemann.qmd') }}
+          restore-keys: ${{ runner.os }}-groundhog-${{ env.R_VERSION }}-
 
+      - name: Install R dependencies via groundhog
+        run: |
+          library(groundhog)
+          set.groundhog.folder("/home/runner/R_groundhog/")
+          pkgs <- c("quarto", "rmarkdown", "knitr")
+          groundhog.library(pkgs, "2025-07-01",force.install=T)
+        shell: Rscript {0}
 
+      - name: Install R dependencies via groundhog 2
+        run: |
+          library(groundhog)
+          set.groundhog.folder("/home/runner/R_groundhog/")
+          pkgs = c(
+            "dplyr",
+            "stringr",
+            "lubridate",
+            "scales",
+            "googlesheets4",
+            "httr",
+            "xml2",
+            "rvest",
+            "pander",
+            "kableExtra",
+            "scholar"
+          )
+          groundhog.library(pkgs, "2025-07-01",force.install=T)
+        shell: Rscript {0}
 
+      - name: Set up TinyTeX (LaTeX engine for Quarto)
+        uses: r-lib/actions/setup-tinytex@v2
 
+      - name: Cache TinyTeX
+        uses: actions/cache@v4
+        with:
+          path: ~/TinyTeX
+          key: ${{ runner.os }}-tinytex-${{ hashFiles('quarto.yml', 'cv_mschoemann.qmd') }}
+          restore-keys: ${{ runner.os }}-tinytex-
 
+      - name: Install essential LaTeX packages
+        run: |
+          tlmgr install marvosym parskip fancyhdr lastpage hyperref xcolor svg
 
+      - name: Check Quarto project
+        run: |
+          quarto check
 
-      # - name: Set up Quarto
-      #   uses: quarto-dev/quarto-actions/setup@v2
-      #
-      # - name: Install groundhog
-      #   run: |
-      #     install.packages("groundhog", repos = "https://cloud.r-project.org")
-      #   shell: Rscript {0}
-      #
-      # - name: Cache groundhog folder
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: /home/runner/R_groundhog/
-      #     key: ${{ runner.os }}-groundhog-${{ env.R_VERSION }}-${{ hashFiles('quarto.yml', 'cv_mschoemann.qmd') }}
-      #     restore-keys: ${{ runner.os }}-groundhog-${{ env.R_VERSION }}-
-      #
-      # - name: Install R dependencies via groundhog
-      #   run: |
-      #     library(groundhog)
-      #     set.groundhog.folder("/home/runner/R_groundhog/")
-      #     pkgs <- c("quarto", "rmarkdown", "knitr")
-      #     groundhog.library(pkgs, "2025-07-01",force.install=T)
-      #   shell: Rscript {0}
-      #
-      # - name: Install R dependencies via groundhog 2
-      #   run: |
-      #     library(groundhog)
-      #     set.groundhog.folder("/home/runner/R_groundhog/")
-      #     pkgs = c(
-      #       "dplyr",
-      #       "stringr",
-      #       "lubridate",
-      #       "scales",
-      #       "googlesheets4",
-      #       "httr",
-      #       "xml2",
-      #       "rvest",
-      #       "pander",
-      #       "kableExtra",
-      #       "scholar"
-      #     )
-      #     groundhog.library(pkgs, "2025-07-01",force.install=T)
-      #   shell: Rscript {0}
-      #
-      # - name: Set up TinyTeX (LaTeX engine for Quarto)
-      #   uses: r-lib/actions/setup-tinytex@v2
-      #
-      # - name: Cache TinyTeX
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ~/TinyTeX
-      #     key: ${{ runner.os }}-tinytex-${{ hashFiles('quarto.yml', 'cv_mschoemann.qmd') }}
-      #     restore-keys: ${{ runner.os }}-tinytex-
-      #
-      # - name: Install essential LaTeX packages
-      #   run: |
-      #     tlmgr install marvosym parskip fancyhdr lastpage hyperref xcolor svg
-      #
-      # - name: Check Quarto project
-      #   run: |
-      #     quarto check
-      #
-      # - name: Render PDF
-      #   run: |
-      #     quarto render
-      #
-      # - name: Confirm PDF was created
-      #   run: |
-      #     test -f docs/cv_mschoemann.pdf
-      #
-      # - name: Set up Git Config
-      #   run: |
-      #     git config --global user.name 'Martin Schoemann'
-      #     git config --global user.email 'ms.uni@posteo.org'
-      #
-      # - name: Commit and Push PDF
-      #   run: |
-      #     git add docs/cv_mschoemann.pdf
-      #     git commit -m "Update rendered PDF" || echo "No changes to commit"
-      #     git push
+      - name: Render PDF
+        run: |
+          quarto render
+
+      - name: Confirm PDF was created
+        run: |
+          test -f docs/cv_mschoemann.pdf
+
+      - name: Set up Git Config
+        run: |
+          git config --global user.name 'Martin Schoemann'
+          git config --global user.email 'ms.uni@posteo.org'
+
+      - name: Commit and Push PDF
+        run: |
+          git add docs/cv_mschoemann.pdf
+          git commit -m "Update rendered PDF" || echo "No changes to commit"
+          git push
