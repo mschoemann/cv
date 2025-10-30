@@ -21,8 +21,8 @@ groundhog.library(
 
 gs4_deauth()
 
-gscholar_stats <- function(url) {
-  cites <- get_stats(url)
+gscholar_stats <- function(gscholar_id) {
+  cites <- get_stats(gscholar_id)
   return(paste(
     'Citations:', cites$citations, '•',
     'h-index:',   cites$hindex, '•',
@@ -69,8 +69,8 @@ gscholar_stats <- function(url) {
 #     }
 # }
 
-get_stats <- function(scholar_id) {
-    profile <- get_profile(scholar_id)
+get_stats <- function(gscholar_id) {
+    profile <- get_profile(gscholar_id)
     return(data.frame(
         citations = profile$total_cites,
         hindex = profile$h_index,
