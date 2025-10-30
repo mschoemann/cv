@@ -31,18 +31,26 @@ jobs:
           r-version: ${{ env.R_VERSION }}
           use-public-rspm: false
 
-      - name: Scrape stats
-        run: |
-          install.packages(c('scholar'))
-          library(scholar)
-          gscholar_id <- 'EdZjQtsAAAAJ&hl'
-          profile <- get_profile(gscholar_id)
-          dat = data.frame(
-          citations = profile$total_cites,
-          hindex = profile$h_index,
-          i10index = profile$i10_index)
-          message(capture.output(print(dat)))
-        shell: Rscript {0}
+
+    gscholarstats:
+        needs: build
+        runs-on: ubuntu-latest
+        env:
+            GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+            R_VERSION: '4.5.1'
+        steps:
+          - name: Scrape stats
+            run: |
+              install.packages(c('scholar'))
+              library(scholar)
+              gscholar_id <- 'EdZjQtsAAAAJ&hl'
+              profile <- get_profile(gscholar_id)
+              dat = data.frame(
+              citations = profile$total_cites,
+              hindex = profile$h_index,
+              i10index = profile$i10_index)
+              message(capture.output(print(dat)))
+            shell: Rscript {0}
 
 
 
