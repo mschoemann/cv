@@ -16,6 +16,7 @@
 /.quarto/
 
 # specifics
+code/_*.qmd
 notes.qmd
 
 
