@@ -14,7 +14,7 @@ format:
       - margin=1in
       - heightrounded
     include-in-header:
-      - preamble.tex
+      - code/preamble.tex
 execute:
   warning: false
   echo: false
@@ -38,7 +38,7 @@ execute:
 
 Sys.setlocale("LC_TIME", "en_US.UTF-8")
 
-source("functions.R")
+source("code/functions.R")
 
 # Store IDs
 gscholar_id <- 'EdZjQtsAAAAJ&hl'
@@ -55,22 +55,24 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
 # add #citations -- DONE
 ```
 
-\par\centering{\LARGE{Dr. Martin Schoemann}}
-\par\centering{Psychological Research Methods \& Cognitive Modelling}
+\begin{center}
+{\LARGE Dr. Martin Schoemann}\par
+Psychological Research Methods \& Cognitive Modeling\par
 \vspace{-5pt}
-\par\centering{School of Science -- Faculty of Psychology}
+School of Science -- Faculty of Psychology\par
 \vspace{-5pt}
-\par\centering{TUD Dresden University of Technology}
+TUD Dresden University of Technology\par
 \vspace{-5pt}
-\par\centering{BZW, Office A322}
+BZW, Office A322\par
 \vspace{-5pt}
-\par\centering{Zellescher Weg 17, Dresden, D-01069}
+Zellescher Weg 17, Dresden, D-01069\par
 \vspace{-5pt}
-\par\centering{{\large\Telefon} +49 (351) 463-32467}
+{\large\Telefon} +49 (351) 463-32467\par
 \vspace{-5pt}
-\par\centering{{\large\Letter} martin.schoemann[at]tu-dresden.de}
-<!-- \vspace{-5pt} -->
-<!-- \par\centering{\href{http://www.mschoemann.com}{www.mschoemann.com}} -->
+{\large\Letter} martin.schoemann[at]tu-dresden.de\par
+%\vspace{-5pt}
+%\href{http://www.mschoemann.com}{www.mschoemann.com}
+\end{center}
 
 \vspace{-10pt}
 
@@ -114,7 +116,7 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
     
 \multicolumn{3}{p{16cm}}{Thesis: \emph{Small Sample Advantage in Complex Environments: On the Detection of Population Parameters in the Iowa Gambling Task}}\\
     
-\multicolumn{3}{p{16cm}}{Advisor: \emph{Tilman Betsch}}\\[10pt]
+\multicolumn{3}{p{16cm}}{Advisor: \emph{Tilmann Betsch}}\\[10pt]
 
 2024 & Hochschudidaktik Sachsen, Leipzig, Germany & \textbf{Cert. Teacher of HE}\\
 
@@ -151,15 +153,15 @@ orcid_page = paste0("https://orcid.org/", orcid_id)
 # Publications
 
 <!-- Set spacing in between list -->
+<!-- \apptocmd{\tightlist}{\setlength{\itemsep}{4pt}}{}{} -->
 
-\apptocmd{\tightlist}{\setlength{\itemsep}{4pt}}{}{}
-
-
-ORCID: \href{https://orcid.org/0000-0002-2531-4175}{0000-0002-2531-4175} | [Google Scholar Profile](https://scholar.google.com/citations?user=EdZjQtsAAAAJ&hl=en)
+\begin{center}
+ORCID: \href{https://orcid.org/0000-0002-2531-4175}{0000-0002-2531-4175} | \href{https://scholar.google.com/citations?user=EdZjQtsAAAAJ&hl=en}{Google Scholar Profile}
 
 `{r} gscholar_stats(gscholar_id)`
 
 \* indicates equal contribution
+\end{center}
 
 <!-- \begin{small} -->
 <!-- \emph{Note on author order: In my field, it is conventional that the last author denotes intellectual direction by the senior author when advised student(s) are engaged on the study. On non–student papers, authorship effort is denoted in standard order}. -->
@@ -172,13 +174,13 @@ pubs <- get_cv_sheet('pubs') |>
     left_join(
         gscholar_cites(gscholar_id),
         by = "id_scholar"
-    ) |> 
+    ) |>
     mutate(
-        journal = ifelse(is.na(journal), '', paste0('_', journal, '_.')),
+        journal = ifelse(is.na(journal), '', paste0('_', journal, '_,')),
         number = ifelse(is.na(number), '', paste0(number, '.')),
         doi = if_else(
-            is.na(doi), '',
-            paste0('DOI: [', doi, '](', 'https://doi.org/', doi, ').')
+            is.na(doi), "",
+            paste0("DOI: [", doi, "](", "https://doi.org/", doi, ").")
         ),
         year = paste0("(", year, ")."),
         title = paste0(title,"."),
@@ -208,7 +210,6 @@ make_ordered_list_filtered(pubs, "peer_reviewed")
 #| results: asis
 
 make_ordered_list_filtered(pubs, "working")
-# cat(tmp)
 ```
 
 
@@ -251,9 +252,11 @@ pres_counts = pres |>
     paste(collapse = ', ')
 ```
 
-**Total Presentations by Category**:
+\begin{center}
+\textit{Total Presentations by Category}
 
 `r pres_counts`
+\end{center}
 
 <!-- ## Invited Speaker -->
 
@@ -287,9 +290,10 @@ make_ordered_list_filtered(pres, "poster")
 
 ## Courses Taught at TUD Dresden University of Technology
 ```{r}
-df = get_cv_sheet('classes') |> 
+df = get_cv_sheet('classes') |>
     mutate(
       course = paste0(number, ": ", name),
+      score = paste0(specdec(mean,2)," (",specdec(dept_mean,2),")"),
       # num = paste(responses, '/', enrolled),
       # score = paste(inst_mean, '/', dept_mean),
       # semester = ifelse(semester == 'S20', 'S20$^†$', semester)
@@ -301,22 +305,22 @@ df = get_cv_sheet('classes') |>
       Role = role,
       Type = type,
       Level = level,
-      # `N. Resp. / N. Enrolled` = num,
-      # `Instr. FCE* / Dept Mean` = score
+      `N. Resp.` = responses,
+      `Instr. FCE*` = score,
     )
 
 df |> 
   kbl(booktabs = TRUE, escape = FALSE, linesep = "") |> 
-# |> 
-#   column_spec(4, width = "1.8cm") |> 
-#   column_spec(5, width = "2cm") %>%
+  column_spec(2, width = "6cm") |>
+  # column_spec(7, width = "2cm") |> 
   footnote(
       general_title = "",
-      general = "F = Fall, denotes the winter term, Oct.--Mar.; S = Spring, denotes the summer term, Apr.--Sep."
-    # symbol = c(
-    #   "Faculty Course Evaluations (FCE) are scored by students (1 = worst, 5 = best).",
-    #   "No course evaluations were recorded in Spring 2020 due to the COVID19 pandemic."
-    # )
+      general = "F = Fall, denotes the winter term, Oct.--Mar.; S = Spring, denotes the summer term, Apr.--Sep.",
+      # symbol = "Evaluation results on request."
+    symbol = c(
+        "Faculty Course Evaluations (FCE) for `Overall satisfaction` scored 1--5 (1 = best). Complete evaluation sheets are available upon request."
+    ),
+    threeparttable = TRUE
 )
 ```
 
@@ -540,9 +544,11 @@ make_ordered_list_filtered(service, "professional")
 
 ## Peer Reviewer
 
-Completed 23 journal reviews (2019 - present)
+\begin{center}
+Completed 24 journal reviews (2019 - present)
 
-*List of Journals*
+\textit{List of Journals}
+\end{center}
 
 ```{r}
 #| results: asis
@@ -630,3 +636,7 @@ Fuglesangs Allé 4 & Zellescher Weg 17 \\
 DK-8210, Aarhus V, Denmark & D-01069, Dresden Germany \\
 {\large\Letter} jalo[at]mgmt.au.dk & {\large\Letter} stefan.scherbaum[at]tu-dresden.de
 \end{tabular}
+
+<!-- {{< include code/_researchportfolio.qmd >}} -->
+<!-- {{< include code/_teachingportfolio.qmd >}} -->
+<!-- {{< include code/_previousresearch.qmd >}} -->

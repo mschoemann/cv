@@ -95,11 +95,11 @@ get_cv_sheet <- function(sheet) {
 }
 
 make_ordered_list <- function(x) {
-    return(pandoc.list(x, style = 'ordered'))
+    return(pandoc.list(x, style = 'ordered', loose = TRUE))
 }
 
 make_bullet_list <- function(x) {
-  return(pandoc.list(x, style = 'bullet'))
+  return(pandoc.list(x, style = 'bullet', loose = TRUE))
 }
 
 make_ordered_list_filtered <- function(df, cat) {
@@ -151,3 +151,5 @@ label_euro <- scales::label_currency(
     big.mark = ",",
     decimal.mark = "."
 )
+
+specdec = function(x, k) trimws(format(round(x, k), nsmall=k))
