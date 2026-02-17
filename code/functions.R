@@ -16,7 +16,7 @@ pkgs = c(
 
 groundhog.library(
     pkgs,
-    "2025-07-01"
+    "2026-01-01",
 )
 
 gs4_deauth()

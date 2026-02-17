@@ -637,6 +637,31 @@ DK-8210, Aarhus V, Denmark & D-01069, Dresden Germany \\
 {\large\Letter} jalo[at]mgmt.au.dk & {\large\Letter} stefan.scherbaum[at]tu-dresden.de
 \end{tabular}
 
+<!-- \textbf{Prof. Jacob L. Orquin, PhD}   -->
+<!-- Department of Management   -->
+<!-- Aarhus University   -->
+<!-- Fuglesangs Allé 4   -->
+<!-- DK-8210, Aarhus V, Denmark   -->
+<!-- jalo[at]mgmt.au.dk -->
+
+<!-- \vspace{1em} -->
+
+<!-- \textbf{Prof. Dr. Stefan Scherbaum}   -->
+<!-- Psychological Research Methods and Cognitive Modelling   -->
+<!-- TUD Dresden University of Technology   -->
+<!-- Zellescher Weg 17   -->
+<!-- D-01069, Dresden Germany   -->
+<!-- stefan.scherbaum[at]tu-dresden.de -->
+
+<!-- \vspace{1em} -->
+
+<!-- \textbf{Dr. Frank Renkewitz}   -->
+<!-- Empirical Research Methods and Statistics   -->
+<!-- University of Erfurt   -->
+<!-- Nordhäuser Str. 63   -->
+<!-- D-99089, Erfurt Germany   -->
+<!-- frank.renkewitz[at]uni-erfurt.de -->
+
 <!-- {{< include code/_researchportfolio.qmd >}} -->
 <!-- {{< include code/_teachingportfolio.qmd >}} -->
 <!-- {{< include code/_previousresearch.qmd >}} -->
