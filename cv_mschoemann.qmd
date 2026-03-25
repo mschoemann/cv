@@ -366,7 +366,7 @@ advisees <- get_cv_sheet('advising') |>
             is.na(date_start) ~ paste0(' (', date_stop, ').'),
             .default = paste0(' (',  date_start, ' to ', date_stop, ').')
         ),
-        # date_start = if_else(is.na(date_start), date_stop, date_start),
+        date_start = if_else(is.na(date_start), date_stop, date_start),
         with = ifelse(is.na(with), '', paste0(', with ', with)),
         citation = if_else(
             is.na(title), name, paste0(name, ', ', enquote(title))
