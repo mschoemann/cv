@@ -41,7 +41,7 @@ Sys.setlocale("LC_TIME", "en_US.UTF-8")
 source("code/functions.R")
 
 # Store IDs
-gscholar_id <- 'EdZjQtsAAAAJ&hl'
+gscholar_id <- 'EdZjQtsAAAAJ'
 gscholar_page <- paste0("https://scholar.google.com/citations?user=", gscholar_id)
 orcid_id = "0000-0002-2531-4175"
 orcid_page = paste0("https://orcid.org/", orcid_id)
