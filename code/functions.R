@@ -25,6 +25,25 @@ gscholar_stats <- function(gscholar_id) {
   ))
 }
 
+get_cites <- function(url) {
+    html <- tryCatch(xml2::read_html(url), error = function(e) NULL)
+    if (is.null(html)) {
+        message("Could not fetch Scholar page (possibly blocked).")
+        return(NULL)
+    }
+
+    node <- rvest::html_nodes(html, xpath = '//*[@id="gsc_rsb_st"]')
+    if (length(node) == 0) {
+        message("Summary table not found - Scholar may have served a block page.")
+        return(NULL)
+    }
+
+    cites_df <- rvest::html_table(node)[[1]]
+    cites <- data.frame(t(as.data.frame(cites_df)[, 2]))
+    names(cites) <- c('citations', 'hindex', 'i10index')
+    return(cites)
+}
+
 get_stats <- function(gscholar_id) {
     profile = get_profile(gscholar_id)
     return(

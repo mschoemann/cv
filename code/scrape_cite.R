@@ -2,14 +2,16 @@
 source("code/functions.R")
 
 gscholar_id = 'EdZjQtsAAAAJ'
-stats = get_stats(gscholar_id)
-pubs = get_publications(gscholar_id) |>
-    select(year, title, pubid, cites) |>
-    arrange(desc(year))
+gscholar_page = paste0("https://scholar.google.com/citations?user=", gscholar_id,"&hl=en")
+# stats = get_stats(gscholar_id)
+stats = get_cites(gscholar_page)
+# pubs = get_publications(gscholar_id) |>
+#     select(year, title, pubid, cites) |>
+#     arrange(desc(year))
 
 
 write_csv(stats, "data/scholar_stats.csv")
-write_csv(pubs,  "data/scholar_pubs.csv")
+# write_csv(pubs,  "data/scholar_pubs.csv")
 
 
 # log ----
