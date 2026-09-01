@@ -1,32 +1,30 @@
-library(groundhog)
-
 pkgs = c(
-    "dplyr",
-    "stringr",
-    "lubridate",
-    "scales",
-    "googlesheets4",
-    "httr",
-    "xml2",
-    "rvest",
-    "pander",
-    "kableExtra",
-    "scholar"
+
 )
 
-groundhog.library(
-    pkgs,
-    "2026-01-01",
+pacman::p_load(
+    stringr,
+    lubridate,
+    scales,
+    dplyr,
+    googlesheets4,
+    httr,
+    xml2,
+    rvest,
+    pander,
+    kableExtra,
+    scholar
 )
 
 gs4_deauth()
 
 gscholar_stats <- function(gscholar_id) {
   cites <- get_stats(gscholar_id)
-  return(paste(
-    'Citations:', cites$citations, '•',
-    'h-index:',   cites$hindex, '•',
-    'i10-index:', cites$i10index
+  hy <- "\u2010"   # true Unicode hyphen
+  return(paste0(
+      'citations: ', cites$citations, ' • ',
+      'h', hy, 'index: ',   cites$hindex, ' • ',
+      'i10', hy, 'index: ', cites$i10index
   ))
 }
 
@@ -71,11 +69,13 @@ gscholar_stats <- function(gscholar_id) {
 
 get_stats <- function(gscholar_id) {
     profile <- get_profile(gscholar_id)
-    return(data.frame(
-        citations = profile$total_cites,
-        hindex = profile$h_index,
-        i10index = profile$i10_index
-    ))
+    return(
+        tibble(
+            citations = profile$total_cites,
+            hindex = profile$h_index,
+            i10index = profile$i10_index
+        )
+    )
 }
 
 gscholar_cites <- function(gscholar_id) {

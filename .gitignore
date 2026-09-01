@@ -21,3 +21,4 @@ notes.qmd
 
 
 **/*.quarto_ipynb
+.positai

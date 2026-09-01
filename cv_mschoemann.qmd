@@ -63,11 +63,11 @@ School of Science -- Faculty of Psychology\par
 \vspace{-5pt}
 TUD Dresden University of Technology\par
 \vspace{-5pt}
-BZW, Office A322\par
+BZW, Office A318\par
 \vspace{-5pt}
 Zellescher Weg 17, Dresden, D-01069\par
 \vspace{-5pt}
-{\large\Telefon} +49 (351) 463-32467\par
+{\large\Telefon} +49 (351) 463-37899\par
 \vspace{-5pt}
 {\large\Letter} martin.schoemann[at]tu-dresden.de\par
 %\vspace{-5pt}
@@ -81,14 +81,18 @@ Zellescher Weg 17, Dresden, D-01069\par
 \vspace{-10pt}
 \begin{longtable}{llp{15cm}}
 
-2022 -- present & \textbf{TUD Dresden University of Technology}, Dresden, Germany \\
- & Research Associate, Psychological Research Methods and Cognitive Modelling\\[5pt]
+2026 -- present & \textbf{TUD Dresden University of Technology}, Dresden, Germany \\
+ & Research Associate (faculty), Psychological Research Methods and Cognitive Modelling\\
+ & \emph{Permanent faculty position (equivalent to tenured)}\\[5pt]
+
+2022 -- 2026 & \textbf{TUD Dresden University of Technology}, Dresden, Germany \\
+ & Research Associate (postdoc), Psychological Research Methods and Cognitive Modelling\\[5pt]
 
 2020 -- 2022 & \textbf{Aarhus University}, Aarhus, Denmark \\
- & Research Assistant, Management\\[5pt]
+ & Research Assistant (predoc), Management\\[5pt]
 
 2016 -- 2020 & \textbf{TUD Dresden University of Technology}, Dresden, Germany \\
- & Predoctoral Researcher, Psychological Research Methods and Cognitive Modelling \\
+ & Research Associate (predoc), Psychological Research Methods and Cognitive Modelling \\
  & and CRC 940 \emph{Volition and Cognitive Control}
 \end{longtable}
 
@@ -156,11 +160,11 @@ Zellescher Weg 17, Dresden, D-01069\par
 <!-- \apptocmd{\tightlist}{\setlength{\itemsep}{4pt}}{}{} -->
 
 \begin{center}
-ORCID: \href{https://orcid.org/0000-0002-2531-4175}{0000-0002-2531-4175} | \href{https://scholar.google.com/citations?user=EdZjQtsAAAAJ&hl=en}{Google Scholar Profile}
+ORCID: \href{https://orcid.org/0000-0002-2531-4175}{0000-0002-2531-4175} • \href{https://scholar.google.com/citations?user=EdZjQtsAAAAJ&hl=en}{Google Scholar Profile}
 
 `{r} gscholar_stats(gscholar_id)`
 
-\* indicates equal contribution
+$^{*}$ indicates equal contribution
 \end{center}
 
 <!-- \begin{small} -->
@@ -312,13 +316,18 @@ df = get_cv_sheet('classes') |>
 df |> 
   kbl(booktabs = TRUE, escape = FALSE, linesep = "") |> 
   column_spec(2, width = "6cm") |>
-  # column_spec(7, width = "2cm") |> 
+  # kable_styling(latex_options = "hold_position") |>
   footnote(
       general_title = "",
-      general = "F = Fall, denotes the winter term, Oct.--Mar.; S = Spring, denotes the summer term, Apr.--Sep.",
-      # symbol = "Evaluation results on request."
-    symbol = c(
-        "Faculty Course Evaluations (FCE) for `Overall satisfaction` scored 1--5 (1 = best). Complete evaluation sheets are available upon request."
+      general = paste0(
+      "F = Fall, denotes the winter term, Oct.--Mar.; ",
+      "S = Spring, denotes the summer term, Apr.--Sep."
+    ),
+    symbol = paste0(
+      "Faculty Course Evaluations (FCE) for ``Overall satisfaction'' scored ",
+      "1--5 (1 = best). Department mean of similar courses in parentheses. ",
+      "Evaluations are reported NA if too few responses were collected. ",
+      "Complete evaluation sheets (in German) are available upon request."
     ),
     threeparttable = TRUE
 )
@@ -545,7 +554,7 @@ make_ordered_list_filtered(service, "professional")
 ## Peer Reviewer
 
 \begin{center}
-Completed 24 journal reviews (2019 - present)
+Completed 33 journal reviews (2019 - present)
 
 \textit{List of Journals}
 \end{center}
