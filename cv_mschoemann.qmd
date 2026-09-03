@@ -20,13 +20,12 @@ execute:
   echo: false
   message: false
   eval: true
+  error: false
 ---
 
 ```{r}
 #| name: setup
 #| include: false
-#| message: false
-#| eval: true
 
 # knitr::opts_chunk$set(
 #   fig.path = "figs/",
@@ -38,14 +37,8 @@ execute:
 
 Sys.setlocale("LC_TIME", "en_US.UTF-8")
 
-source("code/functions.R")
-
-# Store IDs
-gscholar_id <- 'EdZjQtsAAAAJ'
-gscholar_page <- paste0("https://scholar.google.com/citations?user=", gscholar_id)
-orcid_id = "0000-0002-2531-4175"
-orcid_page = paste0("https://orcid.org/", orcid_id)
-
+source("code/get_ids.R")
+source("code/functions_render.R")
 
 # TODO
 # check if ordering is consistent - recent first.
@@ -153,7 +146,6 @@ Zellescher Weg 17, Dresden, D-01069\par
 - **Meta analysis \& Meta studies**: Teaching methods for synthesizing evidence across studies and to establish robust and generalizable psychological research findings.
 
 
-
 # Publications
 
 <!-- Set spacing in between list -->
@@ -170,6 +162,7 @@ $^{*}$ indicates equal contribution
 <!-- \begin{small} -->
 <!-- \emph{Note on author order: In my field, it is conventional that the last author denotes intellectual direction by the senior author when advised student(s) are engaged on the study. On non–student papers, authorship effort is denoted in standard order}. -->
 <!-- \end{small} -->
+
 
 ## Refereed Journal Articles
 
@@ -392,12 +385,14 @@ advisees <- get_cv_sheet('advising') |>
 
 
 ## Doctoral Students
+
 ```{r}
 #| results: asis
 
 advisees |>
   make_ordered_list_filtered("dr")
 ```
+
 
 ## Master's Students
 
@@ -488,6 +483,7 @@ make_grants_list(grants_internal)
 
 
 ## Affiliated Grants
+
 ```{r}
 #| results: asis
 
@@ -536,6 +532,7 @@ service <- get_cv_sheet('service') |>
 
 
 ## Faculty Service
+
 ```{r}
 #| results: asis
 
@@ -544,6 +541,7 @@ make_ordered_list_filtered(service, "faculty")
 
 
 ## Professional Service
+
 ```{r}
 #| results: asis
 
@@ -558,6 +556,7 @@ Completed 33 journal reviews (2019 - present)
 
 \textit{List of Journals}
 \end{center}
+
 
 ```{r}
 #| results: asis

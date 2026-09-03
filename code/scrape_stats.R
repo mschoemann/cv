@@ -1,23 +1,26 @@
+# setup ----
+pacman::p_load(
+    readr,
+    dplyr
+)
+
+source("code/get_ids.R")
+source("code/functions_scrape-stats.R")
+
+
 # scrape ----
-source("code/functions.R")
-
-gscholar_id = 'EdZjQtsAAAAJ'
-gscholar_page = paste0("https://scholar.google.com/citations?user=", gscholar_id,"&hl=en")
-# stats = get_stats(gscholar_id)
-stats = get_cites(gscholar_page)
-# pubs = get_publications(gscholar_id) |>
-#     select(year, title, pubid, cites) |>
-#     arrange(desc(year))
-
+stats = get_stats(gscholar_id)
+pubs = get_cites(gscholar_id) |>
+    arrange(desc(year))
 
 write_csv(stats, "data/scholar_stats.csv")
-# write_csv(pubs,  "data/scholar_pubs.csv")
+write_csv(pubs, "data/scholar_pubs.csv")
 
 
-# log ----
-log_path <- "data/scrape_log.csv"
+# log scrape ----
+log_path = "data/scrape_log.csv"
 
-log_entry <- tibble(
+log_entry = tibble(
     timestamp    = format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
     stats_ok     = !is.null(stats),
     pubs_ok      = !is.null(pubs),
@@ -29,7 +32,7 @@ log_entry <- tibble(
 
 # Append if the log exists, otherwise create it with a header
 if (file.exists(log_path)) {
-    write_csv(log_entry, log_path, append = TRUE)
+    write_csv(log_entry, log_path)
 } else {
     write_csv(log_entry, log_path)   # writes header on first run
 }

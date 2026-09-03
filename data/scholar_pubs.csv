@@ -1,34 +1,34 @@
-year,title,pubid,cites
-2026,The Robustness of Mental Accounting Across 21 Countries,dhFuZR0502QC,0
-2026,From charm to conflict: Simulating narcissistic interpersonal dynamics with agent-based modeling.,QIV2ME_5wuYC,0
-2026,Intact delay discounting but more optimal reward‐based decisions in anorexia nervosa during an experiential task,mVmsd5A6BfQC,0
-2026,A large-scale dataset of choice and response-time data in intertemporal choice,9ZlFYXVOiuMC,0
-2026,Assessing complex belief structures with the triads task: Efficiency of task design and levels of analysis,Wp0gIr-vW9MC,0
-2026,Assessing complex belief structures with the triads task: Reliability and validity,4DMP91E08xMC,0
-2025,A method for measuring consumer confusion due to lookalike labels,3fE2CSJIrl8C,9
-2025,Exploring the synthesis of mouse cursor tracking and drift diffusion modeling in a perceptual decision-making task,kNdYIx-mwKoC,2
-2025,Prior multisensory learning can facilitate auditory-only voice-identity and speech recognition in noise,8k81kl-MbHgC,2
-2025,Reduced contextual influence on decision conflict during delay discounting persists after weight-restoration in anorexia nervosa,ULOm3_A8WrAC,2
-2025,A computational framework to study the etiology of grandiose narcissism,Zph67rFs4hoC,2
-2025,Mouse cursor tracking contributes to the psychological validation of the drift diffusion model,aqlVkmm33-oC,0
-2025,Rebiasing Heuristics and Biases: A Novel Framework for Risk Perception and Decision-Making,qxL8FJ1GzNcC,0
-2025,Testing the link between decision and action dynamics,_kc_bZDykSQC,0
-2025,The Trouble with Reverse Inference: On the Mapping between Decision Processes and Movement Dynamics,M3ejUd6NZC8C,0
-2024,Choice repetition bias in intertemporal choice: An eye-tracking study,0EnyYjriUFMC,5
-2023,On the trajectory of discrimination: A meta-analysis and forecasting survey capturing 44 years of field experiments on gender and hiring decisions,KlAtU1dfN6UC,101
-2023,Covert attention leads to fast and accurate decision-making.,_FxGoFyzp5QC,29
-2023,Mouse‐cursor trajectories reveal reduced contextual influence on decision conflict during delay discounting in anorexia nervosa,Se3iqnhoufwC,6
-2023,The robustness of mental accounting: a global perspective,UebtZRa9Y70C,5
-2023,Gute wissenschaftliche Praxis und Open Science im Empiriepraktikum: Wissenschaftlicher Kompetenzerwerb durch Replikationsstudien,hqOjcs7Dif8C,4
-2021,Using mouse cursor tracking to investigate online cognition: Preserving methodological ingenuity while moving toward reproducible science,u5HHmVD_uO8C,101
-2021,To stay or not to stay: The stability of choice perseveration in value-based decision making,WF5omc3nYNoC,23
-2020,Design factors in mouse-tracking: What makes a difference?,2osOgNQ5qMEC,94
-2020,Changes-of-mind in the absence of new post-decision evidence,Y0pCki6q_DkC,49
-2020,From high-to one-dimensional dynamics of decision making: testing simplifications in attractor models,W7OEmFMy1HYC,8
-2019,Validating mouse-tracking: How design factors influence action dynamics in intertemporal decision making,qjMakFHDy7sC,55
-2019,Lost to translation: How design factors of the mouse-tracking procedure impact the inference from action to cognition,zYLM7Y9cAGgC,36
-2019,Forward inference in risky choice: Mapping gaze and decision processes,9yKSN-GCB0IC,32
-2019,Choice perseveration in value-based decision making: The impact of inter-trial interval and mood,IjCSPb-OGe4C,19
-2019,Choice history bias in intertemporal choice,Tyk-4Ss8FVUC,6
-2017,Attractor dynamics in delay discounting: A call for complexity,u-x6o8ySG0sC,1
-2016,Lost in search:(Mal-) adaptation to probabilistic decision environments in children and adults.,d1gkVwhDpl0C,48
+id_scholar,year,title,cites
+dhFuZR0502QC,2026,The Robustness of Mental Accounting Across 21 Countries,0
+QIV2ME_5wuYC,2026,From charm to conflict: Simulating narcissistic interpersonal dynamics with agent-based modeling.,0
+mVmsd5A6BfQC,2026,Intact delay discounting but more optimal reward‐based decisions in anorexia nervosa during an experiential task,0
+9ZlFYXVOiuMC,2026,A large-scale dataset of choice and response-time data in intertemporal choice,0
+Wp0gIr-vW9MC,2026,Assessing complex belief structures with the triads task: Efficiency of task design and levels of analysis,0
+4DMP91E08xMC,2026,Assessing complex belief structures with the triads task: Reliability and validity,0
+3fE2CSJIrl8C,2025,A method for measuring consumer confusion due to lookalike labels,9
+kNdYIx-mwKoC,2025,Exploring the synthesis of mouse cursor tracking and drift diffusion modeling in a perceptual decision-making task,2
+8k81kl-MbHgC,2025,Prior multisensory learning can facilitate auditory-only voice-identity and speech recognition in noise,2
+ULOm3_A8WrAC,2025,Reduced contextual influence on decision conflict during delay discounting persists after weight-restoration in anorexia nervosa,2
+Zph67rFs4hoC,2025,A computational framework to study the etiology of grandiose narcissism,2
+aqlVkmm33-oC,2025,Mouse cursor tracking contributes to the psychological validation of the drift diffusion model,0
+qxL8FJ1GzNcC,2025,Rebiasing Heuristics and Biases: A Novel Framework for Risk Perception and Decision-Making,0
+_kc_bZDykSQC,2025,Testing the link between decision and action dynamics,0
+M3ejUd6NZC8C,2025,The Trouble with Reverse Inference: On the Mapping between Decision Processes and Movement Dynamics,0
+0EnyYjriUFMC,2024,Choice repetition bias in intertemporal choice: An eye-tracking study,5
+KlAtU1dfN6UC,2023,On the trajectory of discrimination: A meta-analysis and forecasting survey capturing 44 years of field experiments on gender and hiring decisions,101
+_FxGoFyzp5QC,2023,Covert attention leads to fast and accurate decision-making.,29
+Se3iqnhoufwC,2023,Mouse‐cursor trajectories reveal reduced contextual influence on decision conflict during delay discounting in anorexia nervosa,6
+UebtZRa9Y70C,2023,The robustness of mental accounting: a global perspective,5
+hqOjcs7Dif8C,2023,Gute wissenschaftliche Praxis und Open Science im Empiriepraktikum: Wissenschaftlicher Kompetenzerwerb durch Replikationsstudien,4
+u5HHmVD_uO8C,2021,Using mouse cursor tracking to investigate online cognition: Preserving methodological ingenuity while moving toward reproducible science,101
+WF5omc3nYNoC,2021,To stay or not to stay: The stability of choice perseveration in value-based decision making,23
+2osOgNQ5qMEC,2020,Design factors in mouse-tracking: What makes a difference?,94
+Y0pCki6q_DkC,2020,Changes-of-mind in the absence of new post-decision evidence,49
+W7OEmFMy1HYC,2020,From high-to one-dimensional dynamics of decision making: testing simplifications in attractor models,8
+qjMakFHDy7sC,2019,Validating mouse-tracking: How design factors influence action dynamics in intertemporal decision making,55
+zYLM7Y9cAGgC,2019,Lost to translation: How design factors of the mouse-tracking procedure impact the inference from action to cognition,36
+9yKSN-GCB0IC,2019,Forward inference in risky choice: Mapping gaze and decision processes,32
+IjCSPb-OGe4C,2019,Choice perseveration in value-based decision making: The impact of inter-trial interval and mood,19
+Tyk-4Ss8FVUC,2019,Choice history bias in intertemporal choice,6
+u-x6o8ySG0sC,2017,Attractor dynamics in delay discounting: A call for complexity,1
+d1gkVwhDpl0C,2016,Lost in search:(Mal-) adaptation to probabilistic decision environments in children and adults.,48
