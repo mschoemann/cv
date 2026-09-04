@@ -3,110 +3,56 @@ name: Render Quarto PDF
 on:
   # push:
   schedule:
-    # Every Saturday at 22:00 UTC → Sunday 00:00 UTC+2 (CEST)
+    # Every Saturday at 22:00 UTC → Sunday 00:00 CEST (UTC+2)
     - cron: '0 22 * * 6'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      R_VERSION: '4.5.1'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # ICU (stringr/stringi) + font/text-shaping libs (kableExtra, graphics).
+      # libcurl dropped: no live networking at render time (Scholar reads CSVs).
       - name: Install System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libicu-dev libcurl4-openssl-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev
+          sudo apt-get install -y libicu-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: ${{ env.R_VERSION }}
-          use-public-rspm: false
+          use-public-rspm: true
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Install groundhog
-        run: |
-          install.packages("groundhog", repos = "https://cloud.r-project.org")
+      # Only bootstrap pacman; helper scripts call pacman::p_load() themselves.
+      - name: Bootstrap pacman
         shell: Rscript {0}
+        run: if (!require("pacman")) install.packages("pacman", repos = "https://cloud.r-project.org")
 
-      - name: Cache groundhog folder
-        uses: actions/cache@v4
-        with:
-          path: /home/runner/R_groundhog/
-          key: ${{ runner.os }}-groundhog-${{ env.R_VERSION }}-${{ hashFiles('quarto.yml', 'cv_mschoemann.qmd') }}
-          restore-keys: ${{ runner.os }}-groundhog-${{ env.R_VERSION }}-
-
-      - name: Install R dependencies via groundhog
-        run: |
-          library(groundhog)
-          set.groundhog.folder("/home/runner/R_groundhog/")
-          pkgs <- c("quarto", "rmarkdown", "knitr")
-          groundhog.library(pkgs, "2025-07-01",force.install=T)
-        shell: Rscript {0}
-
-      - name: Install R dependencies via groundhog 2
-        run: |
-          library(groundhog)
-          set.groundhog.folder("/home/runner/R_groundhog/")
-          pkgs = c(
-            "dplyr",
-            "stringr",
-            "lubridate",
-            "scales",
-            "googlesheets4",
-            "httr",
-            "xml2",
-            "rvest",
-            "pander",
-            "kableExtra",
-            "scholar"
-          )
-          groundhog.library(pkgs, "2025-07-01",force.install=T)
-        shell: Rscript {0}
-
-      - name: Set up TinyTeX (LaTeX engine for Quarto)
+      - name: Set up TinyTeX
         uses: r-lib/actions/setup-tinytex@v2
 
-      - name: Cache TinyTeX
-        uses: actions/cache@v4
-        with:
-          path: ~/TinyTeX
-          key: ${{ runner.os }}-tinytex-${{ hashFiles('quarto.yml', 'cv_mschoemann.qmd') }}
-          restore-keys: ${{ runner.os }}-tinytex-
-
       - name: Install essential LaTeX packages
-        run: |
-          tlmgr install marvosym parskip fancyhdr lastpage hyperref xcolor svg
-
-      - name: Check Quarto project
-        run: |
-          quarto check
+        run: tlmgr install marvosym parskip fancyhdr lastpage hyperref xcolor svg
 
       - name: Render PDF
-        run: |
-          quarto render
+        run: quarto render
 
       - name: Confirm PDF was created
-        run: |
-          test -f docs/cv_mschoemann.pdf
-
-      - name: Set up Git Config
-        run: |
-          git config --global user.name 'Martin Schoemann'
-          git config --global user.email 'ms.uni@posteo.org'
+        run: test -f docs/cv_mschoemann.pdf
 
       - name: Commit and Push PDF
         run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/cv_mschoemann.pdf
-          git commit -m "Update rendered PDF" || echo "No changes to commit"
+          git diff --staged --quiet || git commit -m "Update rendered PDF [skip ci]"
           git push
