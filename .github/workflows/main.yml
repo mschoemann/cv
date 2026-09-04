@@ -3,8 +3,8 @@ name: Render Quarto PDF
 on:
   # push:
   schedule:
-    # Every Saturday at 22:00 UTC → Sunday 00:00 CEST (UTC+2)
-    - cron: '0 22 * * 6'
+    # Every Friday at 20:00 UTC
+    - cron: '0 20 * * 5'
   workflow_dispatch:
 
 permissions:
