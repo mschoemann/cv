@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # ICU (stringr/stringi) + font/text-shaping libs (kableExtra, graphics).
       # libcurl dropped: no live networking at render time (Scholar reads CSVs).
