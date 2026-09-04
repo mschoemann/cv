@@ -35,7 +35,9 @@ jobs:
       # Only bootstrap pacman; helper scripts call pacman::p_load() themselves.
       - name: Bootstrap pacman
         shell: Rscript {0}
-        run: if (!require("pacman")) install.packages("pacman", repos = "https://cloud.r-project.org")
+        run: |
+          if (!require("pacman")) install.packages("pacman", repos = "https://cloud.r-project.org")
+          pacman::p_load(knitr, rmarkdown)
 
       - name: Set up TinyTeX
         uses: r-lib/actions/setup-tinytex@v2
