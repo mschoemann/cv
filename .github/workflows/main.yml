@@ -41,11 +41,11 @@ jobs:
 
       - name: Set up TinyTeX
         uses: r-lib/actions/setup-tinytex@v2
-        env:
-          TINYTEX_VERSION: daily
 
       - name: Install essential LaTeX packages
         run: |
+          tlmgr update --self || true
+          tlmgr update --all || true
           tlmgr install marvosym parskip fancyhdr lastpage hyperref xcolor svg
 
       - name: Render PDF
