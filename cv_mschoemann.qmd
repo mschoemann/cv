@@ -44,8 +44,7 @@ source("code/functions_render.R")
 # check if ordering is consistent - recent first.
 # to numbered lists with highest number first. 
 # adjust education table to academic appointment table.
-# add affiliated grants -- DONE
-# add #citations -- DONE
+# change # peer-reviews to googlesheets variable
 ```
 
 \begin{center}
@@ -552,7 +551,7 @@ make_ordered_list_filtered(service, "professional")
 ## Peer Reviewer
 
 \begin{center}
-Completed 33 journal reviews (2019 - present)
+Completed 35 journal reviews (2019 - present)
 
 \textit{List of Journals}
 \end{center}
