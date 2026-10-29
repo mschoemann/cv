@@ -41,9 +41,12 @@ jobs:
 
       - name: Set up TinyTeX
         uses: r-lib/actions/setup-tinytex@v2
+        env:
+          TINYTEX_VERSION: daily
 
       - name: Install essential LaTeX packages
-        run: tlmgr install marvosym parskip fancyhdr lastpage hyperref xcolor svg
+        run: |
+          tlmgr install marvosym parskip fancyhdr lastpage hyperref xcolor svg
 
       - name: Render PDF
         run: quarto render
